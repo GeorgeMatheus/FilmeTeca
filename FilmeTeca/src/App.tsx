@@ -1,9 +1,17 @@
-import { Login } from "./components/Login"
-import { Api } from "./components/Api"
+import GlobalStyle from './styles/global'
+import { AppRoutes } from './routes';
 
 
 function App() {
-  return <Api />
+  
+  return (
+
+    <>
+      <GlobalStyle />
+      <AppRoutes />
+    </>
+
+  )
 }
 
 export default App
