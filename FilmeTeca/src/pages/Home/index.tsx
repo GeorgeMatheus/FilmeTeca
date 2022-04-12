@@ -1,6 +1,6 @@
 import React from "react";
 import { useApi } from "../../hooks/useApi";
-import { Title, Container, ContainerFilme } from './styles'
+import { Title, ContainerFilme, ListaFilmes, Container, ContainerFiltros, CardFilme, MediaCard} from './styles'
 import { Formulario } from '../../components/Formulario'
 
 type Filme = {
@@ -21,7 +21,7 @@ export function Home() {
 
   return(
       <Container>
-        <div>
+        <ContainerFiltros>
           <h2>Filtros</h2>
 
           <ul>
@@ -32,28 +32,35 @@ export function Home() {
             <li>Terror</li>
             <li>Suspense</li>
           </ul>
-        </div>
+        </ContainerFiltros>
 
-        <div>
+        <ContainerFilme>
           <Title>Filmes Populares</Title>
           <Formulario />
 
-          <ul>
+          <ListaFilmes>
           {/* filmes? - Pode ser nulo pois a requisição a API ainda pode não ter sido carregado e quando carregar apresentar.*/}
           {isFetching && <p>Carregando...</p>}
           {filmes?.map(filme => {
             return (
-              <li key={filme.id.toString()}>
-                <img src={`${image_path}${filme.poster_path}`}></img>
-                <strong>{filme.title}</strong>
-                <p>{filme.vote_average}</p>
-                <p>{filme.release_date}</p>
-              </li>
+
+              <CardFilme>
+                <li key={filme.id.toString()}>
+
+                  <MediaCard>
+                    <a href="#"><img src={`${image_path}${filme.poster_path}`}></img></a>
+
+                    <strong><h3>{filme.title}</h3></strong>
+                    {/* <p>{filme.vote_average}</p> */}
+                    <p>{filme.release_date}</p>
+                  </MediaCard>
+                </li>
+              </CardFilme>
             )
           })}
 
-          </ul>
-        </div>
+          </ListaFilmes>
+        </ContainerFilme>
       </Container>
   )
 }
