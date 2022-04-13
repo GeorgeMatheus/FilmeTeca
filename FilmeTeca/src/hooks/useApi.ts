@@ -6,6 +6,7 @@ const api = axios.create({
   baseURL: 'https://api-filmeteca.herokuapp.com/'
 })
 
+
 export function useApi< T = unknown>(url: string) {
 
   // Dados genericos recebido de uma API
@@ -33,3 +34,5 @@ export function useApi< T = unknown>(url: string) {
   return { data, error, isFetching }
 
 }
+
+

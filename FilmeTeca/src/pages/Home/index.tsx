@@ -1,6 +1,7 @@
 import React from "react";
 import { useApi } from "../../hooks/useApi";
 import { Title, ContainerFilme, ListaFilmes, Container, ContainerFiltros, CardFilme, MediaCard} from './styles'
+import  { Link } from 'react-router-dom'
 import { Formulario } from '../../components/Formulario'
 
 type Filme = {
@@ -21,7 +22,7 @@ export function Home() {
 
   return(
       <Container>
-        <ContainerFiltros>
+        <ContainerFiltros> 
           <h2>Filtros</h2>
 
           <ul>
@@ -48,9 +49,12 @@ export function Home() {
                 <li key={filme.id.toString()}>
 
                   <MediaCard>
-                    <a href="#"><img src={`${image_path}${filme.poster_path}`}></img></a>
+
+                    <Link to ={`/filme/${filme.id}`}><img src={`${image_path}${filme.poster_path}`}></img></Link>
+                    {/* <a href="#"><img src={`${image_path}${filme.poster_path}`}></img></a> */}
 
                     <strong><h3>{filme.title}</h3></strong>
+
                     {/* <p>{filme.vote_average}</p> */}
                     <p>{filme.release_date}</p>
                   </MediaCard>
