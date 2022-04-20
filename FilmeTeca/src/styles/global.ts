@@ -29,6 +29,7 @@ export default createGlobalStyle`
 
     }
     
+    font-family: 'Ubuntu', sans-serif;
   
   }
 
