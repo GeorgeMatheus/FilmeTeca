@@ -1,11 +1,10 @@
 import React from "react";
-import { Form } from './styles'
 
 export function Formulario() {
   return (
-    <Form>
+    <form>
       <input placeholder="Pesquise aqui o seu filme"/>
       <button type="submit">Pesquisar</button>
-    </Form>
+    </form>
   )
 }

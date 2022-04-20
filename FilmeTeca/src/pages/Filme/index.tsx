@@ -1,6 +1,7 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { Navbar } from "../../components/Navbar"
 
 // type Filme = {
 //   id: String;
@@ -31,6 +32,8 @@ export function Filme() {
   console.log(filme)
 
   return (
+    <>
+    <Navbar />
     <div>
       <a><img src={`${image_path}${filme.poster_path}`} alt="" /></a>
       <h1>{filme.title}</h1>
@@ -38,7 +41,7 @@ export function Filme() {
       
     </div>
 
-
+    </>
 
     // https://api-filmeteca.herokuapp.com/filmes/procurar?id_filme=385128-f9
 

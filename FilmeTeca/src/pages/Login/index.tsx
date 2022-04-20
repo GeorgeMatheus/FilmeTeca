@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import './style.scss'
+import { Navbar } from "../../components/Navbar"
 
 
 export function Login() {
@@ -8,6 +9,8 @@ export function Login() {
   const [password, setPassword] = useState("")
 
   return(
+    <>
+    <Navbar />
     <div className="container">
       <div className="container-login">
         <div className="wrap-login">
@@ -37,7 +40,7 @@ export function Login() {
         </div>
       </div>
     </div>
-
+    </>
 
   );
 }
