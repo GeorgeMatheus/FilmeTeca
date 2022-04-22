@@ -17,12 +17,12 @@ export const Container = styled.div `
 `
 
 export const ContainerFiltros = styled.div `
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
 
 `
 
 export const ContainerFilme = styled.div `
-  border: 1px solid red;
+  /* border: 1px solid red; */
   padding: 20px;
 
 `
@@ -33,7 +33,7 @@ export const ListaFilmes = styled.ul `
   margin: 60px 0;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   column-gap: 2rem;
   row-gap: 3rem;
 
@@ -63,9 +63,19 @@ export const CardFilme = styled.div `
 `
 
 export const MediaCard = styled.div `
+  
+  & {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+
   img {
     width: 100%;
-    border-radius: 8px 8px 0 0;
+    height: 280px;
+    /* border-radius: 8px 8px 0 0; */
   }
 
   h3 {

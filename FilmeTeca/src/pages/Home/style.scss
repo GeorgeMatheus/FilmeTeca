@@ -1,0 +1,121 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-gap: 10px;
+}
+
+.container-genero {
+
+  margin: 25px 10px;
+  max-height: 800px;
+  padding: 5px;
+
+
+  // border: 2px solid #7b2cbf;
+  border-radius: 8px;
+  box-shadow: 1px 1px 5px 1px black;
+}
+
+.container-genero h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.lista-genero {
+  list-style: none;
+  font-size: 1.1rem;
+  line-height: 3;
+}
+
+
+.container-filmes {
+  padding: 20px;
+}
+
+.title {
+  font-size: 48px;
+  color: black;
+}
+
+.lista-filmes {
+  margin: 60px 0;
+  padding: 3px;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  column-gap: 2rem;
+  row-gap: 3rem;
+}
+
+.card-filme {
+
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  transition: all 0.3s;
+  border-radius: 8px;
+  box-shadow: 8px 2px 23px black;
+
+  cursor: pointer;
+  
+  &:hover {
+    transform: scale(1.1);
+  }
+
+}
+
+.img-card {
+  flex: 1;
+  position: relative;
+  // border: 4px solid black;
+}
+
+.img-card img {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  // border: 4px solid orange;
+}
+
+.pontuacao-filme {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: yellow;
+}
+
+
+.pontuacao-info {
+  display: flex;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+}
+
+.icone {
+  display: block;
+  font-size: 48px;
+  position: relative;
+}
+
+.nota {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-weight: bold;
+}
+
+
+
+
+
+.info-card {
+  text-align: center;
+  padding: 10px;
+  // border: 4px solid green;
+}
+
+
+
