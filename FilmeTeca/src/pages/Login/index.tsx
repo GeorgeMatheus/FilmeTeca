@@ -11,7 +11,7 @@ export function Login() {
   return(
     <>
     <Navbar />
-    <div className="container">
+    <div className="container-principal">
       <div className="container-login">
         <div className="wrap-login">
           <form className="login-form">

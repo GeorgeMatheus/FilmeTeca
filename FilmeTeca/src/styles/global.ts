@@ -30,7 +30,7 @@ export default createGlobalStyle`
 
     }
     
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Roboto Slab', serif;
   
   }
 

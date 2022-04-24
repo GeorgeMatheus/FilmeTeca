@@ -50,12 +50,11 @@ export function Home() {
             {/* filmes? - Pode ser nulo pois a requisição a API ainda pode não ter sido carregado e quando carregar apresentar.*/}
             {isFetching && <p>Carregando...</p>}
             {filmes?.map(filme => {
-              console.log(filme.release_date)
               return (
                   <li className="card-filme" key={filme.id.toString()}>
 
                     <div className="img-card">
-                      <Link to={`/filme/${filme.id}`}><img src={`${image_path}${filme.poster_path}`}></img></Link>
+                      <Link to={`/filme/${filme.id}`}><img src={`${image_path}${filme.poster_path}`} alt="Capa Filme"></img></Link>
 
                       <div className="pontuacao-filme">
                           <div className="pontuacao-info">
@@ -68,10 +67,10 @@ export function Home() {
                     </div>
                     
                     <div className="info-card">
-                      <strong><h4>{filme.title}</h4></strong>
+                      <h4>{filme.title}</h4>
 
                       {/* <p>{filme.vote_average}</p> */}
-                      <p>{filme.release_date}</p>
+                      <span>{(filme.release_date).slice(0,4)}</span>
                     </div>
                   </li>
               )

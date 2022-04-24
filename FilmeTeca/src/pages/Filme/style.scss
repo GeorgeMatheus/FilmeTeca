@@ -1,0 +1,70 @@
+.container-Filme {
+  display: flex;
+  padding: 20px;
+  margin-top: 60px;
+  background-color: #10002b;
+}
+
+.container-Filme img {
+  width: 300px;
+  border-radius: 10px;
+}
+
+
+.container-infoFilme {
+  padding-left: 10px;
+}
+
+.container-infoFilme h1 {
+  color: white;
+  font-size: 2rem;
+}
+
+.lancamento {
+  color: white;
+  font-weight: bold;
+}
+
+.generos {
+  display: flex;
+
+}
+
+.generos li {
+
+  // list-style: none;
+  // color: white;
+  // background: #bab0af;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  margin: 10px 0;
+
+}
+
+
+.btn-media{
+  width: 50px;
+  margin: 10px 10px;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 50%;
+  background-color: #7b2cbf;
+  color: white;
+  border: none;
+
+}
+
+.title-sinopse {
+
+  margin-top: 10px;
+  line-height: 1.5;
+  font-size: 2rem;
+  color: white;
+}
+
+.sinopse {
+  font-size: 1rem;
+  color: white;
+  text-align: justify;
+}
