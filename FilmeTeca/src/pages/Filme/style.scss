@@ -5,6 +5,7 @@
   background-color: #10002b;
 }
 
+
 .container-Filme img {
   width: 300px;
   border-radius: 10px;
@@ -30,6 +31,15 @@
 
 }
 
+.star-rating {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 30px;
+  color: yellow;
+}
+
 .generos li {
 
   // list-style: none;
@@ -41,6 +51,7 @@
   margin: 10px 0;
 
 }
+
 
 
 .btn-media{

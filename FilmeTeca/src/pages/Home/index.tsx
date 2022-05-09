@@ -5,14 +5,7 @@ import { Link } from 'react-router-dom'
 import { Navbar } from '../../components/Navbar'
 import { Formulario } from '../../components/Formulario/Formulario'
 import { FaStar } from 'react-icons/fa'
-
-type Filme = {
-  id: Number;
-  title: String;
-  poster_path: String;
-  vote_average: String;
-  release_date: String;
-}
+import { Filme } from '../../hooks/tipos'
 
 
 export function Home() {
@@ -40,7 +33,7 @@ export function Home() {
             )
           })}
         </div>
-
+        
         <div className="container-filmes">
           {/* <Title>Filmes Populares</Title> */}
           <h1 className="title">Filmes Populares</h1>

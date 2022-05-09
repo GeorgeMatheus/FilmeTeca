@@ -2,49 +2,36 @@ import { useParams } from "react-router-dom"
 import { Navbar } from "../../components/Navbar"
 import { infoFilme } from "../../hooks/useApi"
 import './style.scss'
-
+import { Filme } from '../../hooks/tipos'
+import ReactStars from "react-rating-stars-component"
 import { FaHeart, FaBookmark, FaStar, FaPlay } from 'react-icons/fa'
+import { StarRating } from "../../components/rating/StarRating"
 
 
-interface Genero {
-  id: number;
-  name: string;
-}
 
-interface Filme {
-  id: string;
-  backdrop_path: string;
-  genres: Array<Genero>;
-  title: string;
-  overview: string;
-  poster_path: string;
-  vote_average: string;
-  release_date: string;
-}
-
-
-export function Filme() {
+export function DetalhesFilme() {
 
   const { id } = useParams()
   const image_path = 'https://image.tmdb.org/t/p/w500/'
   const image_path_original = 'https://image.tmdb.org/t/p/original/'
-  // const [filme, setFilme] = useState<Filme[]>([])
 
   const { data: filme, isFetching } = infoFilme<Filme>('filmes/procurar?id_filme=', id)
 
 
   return (
-
-
     <>
-      {console.log(filme)}
       <Navbar />
 
 
       <div>
         {isFetching && <p>Carregando...</p>}
 
-        <div className="container-Filme">
+        <div className="container-Filme" style={{
+          backgroundImage: `url(${image_path_original}${filme?.backdrop_path})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center center",
+          backgroundColor: "rgba(0,0,0,0.8)", backgroundBlendMode: "darken",
+        }}>
+          
+          
           <a><img src={`${image_path}${filme?.poster_path}`} alt="Foto de capa" /></a>
 
           <div className="container-infoFilme">
@@ -64,6 +51,8 @@ export function Filme() {
                 )
               })}
             </div>
+            
+            <StarRating />
 
             <button className="btn-media"><FaHeart /></button>
             <button className="btn-media"><FaBookmark /></button>
@@ -76,43 +65,11 @@ export function Filme() {
 
           </div>
         </div>
-
-
-        {/* <a><img src={`${image_path_original}${filme?.backdrop_path}`} width="1000px" alt="Foto de capa" /></a> */}
-
-
-
+      </div>
+      <div>
+        <h1>Comentarios</h1>
+        
       </div>
     </>
   )
-
-  // useEffect(() => {
-  //   axios.get(`https://api-filmeteca.herokuapp.com/filmes/procurar?id_filme=${id}`)
-  //     .then(response => {
-  //       setFilme(response.data)
-  //     })
-  // }, [id])
-
-  // console.log(filme)
-
-
-
-  // return (
-  //   <>
-  //   <Navbar />
-  //   <div>
-  //     {isFetching && <p>Carregando...</p>}
-  //     <a><img src={`${image_path}${filme?.poster_path}`} alt="Foto de capa" /></a>
-  //     <h1>{filme?.title}</h1>
-  //     <p><strong>{filme?.overview}</strong></p>
-  //     <p>{filme?.genres.name}</p>
-
-  //   </div>
-
-  //   </>
-
-  //   // https://api-filmeteca.herokuapp.com/filmes/procurar?id_filme=385128-f9
-
-
-  // )
 }
