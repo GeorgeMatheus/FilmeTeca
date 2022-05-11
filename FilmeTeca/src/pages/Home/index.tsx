@@ -1,17 +1,19 @@
 import React from "react";
-import { useApi } from "../../hooks/useApi"
+import { useApi, listarGeneros } from "../../hooks/useApi"
 import './style.scss'
 import { Link } from 'react-router-dom'
 import { Navbar } from '../../components/Navbar'
 import { Formulario } from '../../components/Formulario/Formulario'
 import { FaStar } from 'react-icons/fa'
-import { Filme } from '../../hooks/tipos'
+import { Filme, Genero } from '../../hooks/tipos'
 
 
 export function Home() {
 
   const image_path = 'https://image.tmdb.org/t/p/w500/'
-  const { data: filmes, isFetching } = useApi<Filme[]>('filmes/populares')
+  const { data: filmes, isFetching } = useApi<Filme[]>('filme/populares')
+
+  const { data: generos, isFetching: isFetchingGenero } = listarGeneros<Genero[]>('genero')
 
   const filtros = ['Ação', 'Aventura', 'Drama', 'Comédia', 'Terror', 'Suspense', 'Ficção científica', 'Romance']
 
@@ -21,13 +23,13 @@ export function Home() {
       <div className="container">
         <div className="container-genero">
           <h2>Gêneros</h2>
-          {filtros?.map(filtro => {
+          {isFetchingGenero && <p>Carregando</p>}
+          {generos?.map(genero => {
             return (
- 
-              <li className="lista-genero" key={filtro}>
+              <li className="lista-genero" key={genero.id}>
                 {/* <input type="checkbox">{filtro}</input> */}
                 <input type="checkbox" />
-                <label> {filtro}</label>
+                <label>{genero.name}</label>
 
               </li>
             )

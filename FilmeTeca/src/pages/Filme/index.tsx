@@ -3,7 +3,6 @@ import { Navbar } from "../../components/Navbar"
 import { infoFilme } from "../../hooks/useApi"
 import './style.scss'
 import { Filme } from '../../hooks/tipos'
-import ReactStars from "react-rating-stars-component"
 import { FaHeart, FaBookmark, FaStar, FaPlay } from 'react-icons/fa'
 import { StarRating } from "../../components/rating/StarRating"
 
@@ -15,7 +14,7 @@ export function DetalhesFilme() {
   const image_path = 'https://image.tmdb.org/t/p/w500/'
   const image_path_original = 'https://image.tmdb.org/t/p/original/'
 
-  const { data: filme, isFetching } = infoFilme<Filme>('filmes/procurar?id_filme=', id)
+  const { data: filme, isFetching } = infoFilme<Filme>('filme?id=', id)
 
 
   return (
@@ -28,7 +27,7 @@ export function DetalhesFilme() {
 
         <div className="container-Filme" style={{
           backgroundImage: `url(${image_path_original}${filme?.backdrop_path})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center center",
-          backgroundColor: "rgba(0,0,0,0.8)", backgroundBlendMode: "darken",
+          backgroundColor: "rgba(0,0,0,0.8)", backgroundBlendMode: "darken"
         }}>
           
           
@@ -40,6 +39,11 @@ export function DetalhesFilme() {
 
 
             <span className="lancamento">{`${filme?.release_date.slice(8, 10)}/${filme?.release_date.slice(5, 7)}/${filme?.release_date.slice(0, 4)}`}</span>
+
+            
+            <button className="btn-media" style={{marginLeft: "40px"}}><FaHeart /></button>
+            <button className="btn-media"><FaBookmark /></button>
+            <button className="btn-media"><FaPlay /></button>
 
 
             <div className="generos">
@@ -54,14 +58,12 @@ export function DetalhesFilme() {
             
             <StarRating />
 
-            <button className="btn-media"><FaHeart /></button>
-            <button className="btn-media"><FaBookmark /></button>
-            <button className="btn-media"><FaStar /></button>
-
+            <h3 className="tagline">{filme?.tagline}</h3>
 
 
             <h2 className="title-sinopse">Sinopse</h2>
             <p className="sinopse">{filme?.overview}</p>
+            <span className="diretor"><strong>Diretor:</strong> {filme?.diretor.name}</span>
 
           </div>
         </div>
