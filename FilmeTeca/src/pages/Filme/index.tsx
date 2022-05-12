@@ -40,12 +40,6 @@ export function DetalhesFilme() {
 
             <span className="lancamento">{`${filme?.release_date.slice(8, 10)}/${filme?.release_date.slice(5, 7)}/${filme?.release_date.slice(0, 4)}`}</span>
 
-            
-            <button className="btn-media" style={{marginLeft: "40px"}}><FaHeart /></button>
-            <button className="btn-media"><FaBookmark /></button>
-            <button className="btn-media"><FaPlay /></button>
-
-
             <div className="generos">
               {(filme?.genres)?.map(genero => {
                 return (
@@ -55,10 +49,35 @@ export function DetalhesFilme() {
                 )
               })}
             </div>
-            
-            <StarRating />
 
+            <StarRating />
+            
             <h3 className="tagline">{filme?.tagline}</h3>
+
+            
+            <div className="btn-media">
+
+              <div>
+                {/* <span className="btn-tooltip">Favoritar esse filme</span> */}
+                <button className="btn" data-tooltip="Favoritar esse filme"><i><FaHeart /></i></button>
+              </div>
+
+              <div>
+                {/* <span className="btn-tooltip">Adicionar a lista</span> */}
+                <button className="btn" data-tooltip="Adicionar a Lista"><i><FaBookmark /></i></button>
+              </div>
+
+              <div>
+                {/* <span className="btn-tooltip">Reproduzir trailer</span> */}
+                <button className="btn" data-tooltip="Reproduzir trailer"><i><FaPlay /></i></button>
+              </div>
+
+              
+
+            </div>
+
+
+          
 
 
             <h2 className="title-sinopse">Sinopse</h2>

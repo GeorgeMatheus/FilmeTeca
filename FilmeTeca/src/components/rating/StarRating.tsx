@@ -13,7 +13,7 @@ export function StarRating() {
 
   return (
     <div>
-      <Rating onClick={handleRating} ratingValue={rating} allowHalfIcon transition size={35}/* Available Props */ />
+      <Rating onClick={handleRating} ratingValue={rating} allowHalfIcon transition size={30}/* Available Props */ />
     </div>
   )
 }

@@ -1,7 +1,12 @@
+:root {
+  --roxo-escuro: #10002b;
+  --roxo-claro: #7b2cbf;
+}
+
 .container-Filme {
   display: flex;
   padding: 20px;
-  margin-top: 60px;
+  // margin-top: 60px;
   background-color: #10002b;
 }
 
@@ -53,24 +58,93 @@
 }
 
 .tagline {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: gray;
   font-style: italic;
+  margin-top: 5px;
 }
 
 
 .btn-media{
-  width: 46px;
-  height: 38px;
-  margin: 20px 5px;
-  padding: 8px 3px;
-  font-size: 1rem;
-  border-radius: 50%;
-  background-color: #7b2cbf;
-  color: white;
-  border: none;
-  font-size: 1.2rem;
+
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
 }
+
+.btn-media div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-tooltip {
+  background-color: var(--roxo-claro);
+  color: white;
+}
+
+.btn {
+  background-color: var(--roxo-claro);
+  border: none;
+  outline: none;
+  padding: 10px 4px;
+  margin: 3px 5px;
+  border-radius: 40px;
+  width: 36px;
+  height: 36px;
+  position: relative;
+}
+
+.btn::before,
+.btn::after {
+  --scale:0;
+  --arrow-size: 7px;
+  position: absolute;
+  top: -.04rem;
+  left: 50%;
+
+  transform: translateX(-50%) translateY(var(--translate-y,0)) scale(var(--scale));
+  transition: 150ms transform;
+  transform-origin: bottom-center;
+
+
+}
+
+.btn::before {
+  --translate-y: calc(-100% - var(--arrow-size));
+  content: attr(data-tooltip);
+  width: max-content;
+  // max-width: 100%;
+  background: var(--roxo-claro);
+  color: white;
+  font-weight: bold;
+  border-radius: 40px;
+  padding: 5px 10px;
+}
+
+.btn:hover::before,
+.btn:hover::after {
+  --scale: 1;
+}
+
+.btn::after {
+
+  --translate-y: calc(-1 * var(--arrow-size));
+  content: '';
+  border: var(--arrow-size) solid transparent;
+  border-top-color: var(--roxo-claro);
+  transform-origin: top center;
+}
+
+
+.btn-media button i {
+  color: white;
+  font-size: 0.9rem;
+}
+
+
+
 
 
 
@@ -78,7 +152,7 @@
 
   margin-top: 10px;
   line-height: 1.5;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: white;
 }
 
