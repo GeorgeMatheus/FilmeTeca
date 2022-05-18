@@ -2,9 +2,10 @@ import { useParams } from "react-router-dom"
 import { Navbar } from "../../components/Navbar"
 import { infoFilme } from "../../hooks/useApi"
 import './style.scss'
-import { Filme } from '../../hooks/tipos'
+import { Filme, Data } from '../../hooks/tipos'
 import { FaHeart, FaBookmark, FaStar, FaPlay } from 'react-icons/fa'
 import { StarRating } from "../../components/rating/StarRating"
+import userImg from "../../assets/imagem_perfil.png"
 
 
 
@@ -17,6 +18,7 @@ export function DetalhesFilme() {
   const { data: filme, isFetching } = infoFilme<Filme>('filme?id=', id)
 
 
+
   return (
     <>
       <Navbar />
@@ -26,8 +28,7 @@ export function DetalhesFilme() {
         {isFetching && <p>Carregando...</p>}
 
         <div className="container-Filme" style={{
-          backgroundImage: `url(${image_path_original}${filme?.backdrop_path})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center center",
-          backgroundColor: "rgba(0,0,0,0.8)", backgroundBlendMode: "darken"
+          backgroundImage: `url(${image_path_original}${filme?.backdrop_path})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center center", backgroundColor: "rgba(0,0,0,0.8)", backgroundBlendMode: "darken"
         }}>
           
           
@@ -76,10 +77,6 @@ export function DetalhesFilme() {
 
             </div>
 
-
-          
-
-
             <h2 className="title-sinopse">Sinopse</h2>
             <p className="sinopse">{filme?.overview}</p>
             <span className="diretor"><strong>Diretor:</strong> {filme?.diretor.name}</span>
@@ -88,7 +85,40 @@ export function DetalhesFilme() {
         </div>
       </div>
       <div>
-        <h1>Comentarios</h1>
+
+        <div className="cabecalho-comentarios">
+          <h1>Comentários</h1>
+        
+          <span className="qtd-comentarios">{filme?.comentarios.length} Comentários</span>
+        </div>
+
+        <form className="novo-comentario">
+          <img src={userImg} alt="imagem de perfil"/>
+          <textarea rows={5} name="" id="" placeholder="Participe da discussão..." />
+          <button>Comentar</button>
+        </form>
+    
+        <div className="comentarios">
+
+          {(filme?.comentarios)?.map(comentario => {
+            return (
+              <li key={comentario.texto}>
+                
+                <div className="usuario-comentario">
+                  <img src={userImg} alt="imagem de perfil"/>
+
+                  <div>
+                    <a href="#" className="nome-usuario">{comentario.user.nome}</a>
+                    <span className="data-comentario">{`${comentario.data.slice(8,10)}/${comentario.data.slice(5,7)}/${comentario.data.slice(0,4)}`}</span>
+                    <span className="hora-comentario">{`${comentario.data.slice(11,16)}`}</span>
+                    <p className="comentario">{comentario.texto}</p>
+                  </div>
+
+                </div>
+              </li>
+            )
+          })}
+        </div>
         
       </div>
     </>

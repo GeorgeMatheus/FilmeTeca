@@ -61,7 +61,8 @@
   font-size: 1.1rem;
   color: gray;
   font-style: italic;
-  margin-top: 5px;
+  margin-top: 5pxnoss
+  ;
 }
 
 
@@ -145,9 +146,6 @@
 
 
 
-
-
-
 .title-sinopse {
 
   margin-top: 10px;
@@ -173,4 +171,105 @@
   color: white;
   text-align: justify;
 }
+
+.novo-comentario {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 60px;
+}
+
+.cabecalho-comentarios{
+  margin: 20px 60px;
+}
+
+
+.qtd-comentarios {
+  font-size: 1.1rem;
+  font-weight: bold;
+  // padding: 0px 60px;
+  border-bottom: 2px solid black;
+}
+
+.novo-comentario img {
+  width: 55px;
+  border: 1px solid gray;
+  border-radius: 50%;
+  margin-right: 5px;
+  align-self: flex-start;
+}
+
+.novo-comentario textarea {
+  flex: 1;
+  font-size: 1.1rem;
+  height: 70px;
+  border: 1px solid gray;
+  padding: 10px;
+}
+
+.novo-comentario button {
+  background-color: var(--roxo-claro);
+  color: white;
+  height: 40px;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px;
+  font-size: 1.1em;
+  border-radius: 10px;
+  align-self: flex-end;
+}
+
+
+.comentarios {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2rem;
+  padding: 20px 60px;
+}
+
+.comentarios li {
+  list-style: none;
+}
+
+.usuario-comentario {
+  display: flex;
+}
+
+
+.usuario-comentario img {
+  width: 55px;
+  border: 1px solid gray;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.usuario-data {
+  display: flex;
+}
+
+.nome-usuario {
+  color: #10002b;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.data-comentario {
+  margin-left: 5px;
+  font-size: 0.7rem;
+}
+
+.hora-comentario {
+  margin-left: 4px;
+  font-size: 0.7rem;
+}
+
+.comentario {
+  margin-top: 3px;
+}
+
+
+
+
 

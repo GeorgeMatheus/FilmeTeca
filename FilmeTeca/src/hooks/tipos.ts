@@ -9,6 +9,13 @@ export interface Diretor {
   job: string;
 }
 
+export interface Data {
+  dia: string;
+  mes: string;
+  ano: string;
+}
+
+
 export interface Filme {
   id: string;
   backdrop_path: string;
@@ -21,4 +28,22 @@ export interface Filme {
   vote_average: string;
   release_date: string;
   diretor: Diretor;
+  comentarios: Array<Comentario>
+}
+
+export interface Usuario {
+  id: number;
+  nome: string;
+  email: string;
+  comentarios: Array<Comentario>;
+  interesses: Array<Filme>;
+  favoritos: Array<Filme>;
+}
+
+
+export interface Comentario {
+  texto: string;
+  data: string;
+  user: Usuario;
+
 }
