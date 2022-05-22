@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import { Navbar } from "../../components/Navbar"
+import { Navbar } from "../../components/Navbar/Navbar"
 import { infoFilme } from "../../hooks/useApi"
 import './style.scss'
 import { Filme, Data } from '../../hooks/tipos'

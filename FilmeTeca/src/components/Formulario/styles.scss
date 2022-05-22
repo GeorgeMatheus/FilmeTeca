@@ -1,3 +1,8 @@
+:root {
+  --roxo-escuro: #10002b;
+  --roxo-claro: #7b2cbf;
+}
+
 .search-box {
   width: 100%;
   display: flex;
@@ -8,21 +13,22 @@
 
 .search-box input{
   height: 40px;
-  padding: 10px;
-  border-radius: 10px 0 0 10px;
-  border: 1px solid #7b2cbf;
-  font-size: 1rem;
+  border: none;
+  background: whitesmoke;
+  // border-radius: 10px 0 0 10px;
+  border-bottom: 1px solid var(--roxo-claro);
+  font-size: 1.3rem;
   flex: 1;
 }
 
 .search-box button {
-  background: #7b2cbf;
-  font-size: 1.5rem;
+  background: var(--roxo-claro);
+  font-size: 1.3rem;
   color: white;
   border: none;
   // padding: 5px;
   height: 40px;
   width: 50px;
-  border-radius: 0 10px 10px 0;
+  border-radius: 5px;
   
 }

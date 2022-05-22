@@ -1,30 +1,71 @@
+:root {
+  --roxo-escuro: #10002b;
+  --roxo-claro: #7b2cbf;
+}
+
+
+
 .container {
   display: grid;
-  grid-template-columns: 1fr 4fr;
-  grid-gap: 10px;
+  grid-template-columns: 1fr 3fr;
 }
 
 .container-genero {
 
-  margin: 2rem 1rem;
+  margin: 2rem 2rem;
+  width: 300px;
   height: max-content;
-  padding: 5px;
-
-
-  // border: 2px solid #7b2cbf;
+  padding: 35px 30px;
   border-radius: 8px;
   box-shadow: 1px 1px 5px 1px black;
-}
+  background: var(--roxo-escuro);
+  color: white;
 
-.container-genero h2 {
-  margin-bottom: 20px;
-  font-size: 2rem;
-}
+  h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }
 
-.lista-genero {
-  list-style: none;
-  font-size: 1.1rem;
-  line-height: 3;
+  .lista-genero {
+    list-style: none;
+    font-size: 1.1rem;
+    line-height: 3;
+  }
+
+  .lista-genero label{
+    cursor: pointer;
+  }
+
+  .lista-genero input {
+    display: none;
+    
+  }
+
+  .lista-genero input + label:before {
+    content: '';
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 4px;
+    background: var(--roxo-claro);
+    border: 1px solid var(--roxo-escuro);
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    margin-bottom: 4px;
+    cursor: pointer;
+
+
+
+  }
+
+  .lista-genero input:checked + label:before {
+    background-image: url("data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='23' height='23' viewBox='0 0 10 10'%3E%3Cg class='nc-icon-wrapper' stroke-width='2' fill='%23555555'%3E%3Cpath fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' data-cap='butt' d='M2.83 4.72l1.58 1.58 2.83-2.83'/%3E%3C/g%3E%3C/svg%3E");
+    background-color: var(--roxo-claro);
+    background-position: center;
+    border: none;
+    padding: 1px;
+  }
+  
 }
 
 
@@ -77,8 +118,8 @@
 
 .pontuacao-filme {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 3px;
+  left: 3px;
   color: yellow;
 }
 
@@ -105,9 +146,6 @@
   color: black;
   font-weight: bold;
 }
-
-
-
 
 
 .info-card {

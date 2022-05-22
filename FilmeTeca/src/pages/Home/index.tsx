@@ -2,10 +2,12 @@ import React from "react";
 import { useApi, listarGeneros } from "../../hooks/useApi"
 import './style.scss'
 import { Link } from 'react-router-dom'
-import { Navbar } from '../../components/Navbar'
+import { Navbar } from '../../components/Navbar/Navbar'
 import { Formulario } from '../../components/Formulario/Formulario'
 import { FaStar } from 'react-icons/fa'
 import { Filme, Genero } from '../../hooks/tipos'
+import { Botao } from "../../components/Botao";
+import { Rodape } from "../../components/Rodape";
 
 
 export function Home() {
@@ -14,8 +16,6 @@ export function Home() {
   const { data: filmes, isFetching } = useApi<Filme[]>('filme/populares')
 
   const { data: generos, isFetching: isFetchingGenero } = listarGeneros<Genero[]>('genero')
-
-  const filtros = ['Ação', 'Aventura', 'Drama', 'Comédia', 'Terror', 'Suspense', 'Ficção científica', 'Romance']
 
   return (
     <>
@@ -27,17 +27,18 @@ export function Home() {
           {generos?.map(genero => {
             return (
               <li className="lista-genero" key={genero.id}>
-                {/* <input type="checkbox">{filtro}</input> */}
-                <input type="checkbox" />
-                <label>{genero.name}</label>
+                <input id={`genero-${genero.name}`} type="checkbox" />
+                <label htmlFor={`genero-${genero.name}`}>{genero.name}</label>
 
               </li>
             )
           })}
+          <Botao>
+            Aplicar Filtro
+          </Botao>
         </div>
-        
+
         <div className="container-filmes">
-          {/* <Title>Filmes Populares</Title> */}
           <h1 className="title">Filmes Populares</h1>
           <Formulario />
 
@@ -46,34 +47,36 @@ export function Home() {
             {isFetching && <p>Carregando...</p>}
             {filmes?.map(filme => {
               return (
-                  <li className="card-filme" key={filme.id.toString()}>
+                <li className="card-filme" key={filme.id.toString()}>
 
-                    <div className="img-card">
-                      <Link to={`/filme/${filme.id}`}><img src={`${image_path}${filme.poster_path}`} alt="Capa Filme"></img></Link>
+                  <div className="img-card">
+                    <Link to={`/filme/${filme.id}`}><img src={`${image_path}${filme.poster_path}`} alt="Capa Filme"></img></Link>
 
-                      <div className="pontuacao-filme">
-                          <div className="pontuacao-info">
-                            <span className="icone"><FaStar/></span>
-                            <span className="nota">{filme.vote_average}</span>
-                          </div>
+                    <div className="pontuacao-filme">
+                      <div className="pontuacao-info">
+                        <span className="icone"><FaStar /></span>
+                        <span className="nota">{filme.vote_average}</span>
                       </div>
-
-                      {/* <a href="#"><img src={`${image_path}${filme.poster_path}`}></img></a> */}
                     </div>
-                    
-                    <div className="info-card">
-                      <h4>{filme.title}</h4>
 
-                      {/* <p>{filme.vote_average}</p> */}
-                      <span>{(filme.release_date).slice(0,4)}</span>
-                    </div>
-                  </li>
+                    {/* <a href="#"><img src={`${image_path}${filme.poster_path}`}></img></a> */}
+                  </div>
+
+                  <div className="info-card">
+                    <h4>{filme.title}</h4>
+
+                    {/* <p>{filme.vote_average}</p> */}
+                    <span>{(filme.release_date).slice(0, 4)}</span>
+                  </div>
+                </li>
               )
             })}
 
           </div>
         </div>
       </div>
+
+      <Rodape />
     </>
   )
 }

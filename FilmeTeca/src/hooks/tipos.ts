@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface Genero {
   id: number;
   name: string;
@@ -46,4 +48,8 @@ export interface Comentario {
   data: string;
   user: Usuario;
 
+}
+
+export interface LayoutComponent {
+  children: ReactNode;
 }

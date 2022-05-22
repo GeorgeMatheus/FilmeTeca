@@ -8,7 +8,8 @@ import {
 
 import { Home } from "../pages/Home/"
 import { DetalhesFilme } from "../pages/Filme/"
-import {Login } from "../pages/Login"
+import { Login } from "../pages/Login"
+import { Cadastrar } from "../pages/Cadastrar";
 
 
 export function AppRoutes() {
@@ -18,6 +19,7 @@ export function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/filme/:id" element={<DetalhesFilme />} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/cadastrar" element={<Cadastrar />} />
       </Routes>
     </Router>
 
