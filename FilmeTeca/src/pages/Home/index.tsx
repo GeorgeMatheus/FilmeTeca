@@ -1,11 +1,11 @@
-import React from "react";
-import { useApi, listarGeneros } from "../../hooks/useApi"
+import React, { useState } from "react";
+import { useApi, listarGeneros, testeGenero } from "../../hooks/useApi"
 import './style.scss'
 import { Link } from 'react-router-dom'
 import { Navbar } from '../../components/Navbar/Navbar'
 import { Formulario } from '../../components/Formulario/Formulario'
 import { FaStar } from 'react-icons/fa'
-import { Filme, Genero } from '../../hooks/tipos'
+import { Filme, Genero, LayoutComponent } from '../../hooks/tipos'
 import { Botao } from "../../components/Botao";
 import { Rodape } from "../../components/Rodape";
 
@@ -13,29 +13,62 @@ import { Rodape } from "../../components/Rodape";
 export function Home() {
 
   const image_path = 'https://image.tmdb.org/t/p/w500/'
+  let updatedList: Array = ['']
+
   const { data: filmes, isFetching } = useApi<Filme[]>('filme/populares')
 
   const { data: generos, isFetching: isFetchingGenero } = listarGeneros<Genero[]>('genero')
+
+  const [checked, setChecked] = useState([])
+
+
+  const handleCheck = (event) => {
+
+    updatedList = [...checked]
+
+    if (event.target.checked) {
+      updatedList = [...checked, event.target.value]
+    } else {
+      updatedList.splice(checked.indexOf(event.target.value), 1)
+    }
+
+    setChecked(updatedList)
+  }
+
+
 
   return (
     <>
       <Navbar />
       <div className="container">
-        <div className="container-genero">
-          <h2>Gêneros</h2>
-          {isFetchingGenero && <p>Carregando</p>}
-          {generos?.map(genero => {
-            return (
-              <li className="lista-genero" key={genero.id}>
-                <input id={`genero-${genero.name}`} type="checkbox" />
-                <label htmlFor={`genero-${genero.name}`}>{genero.name}</label>
+        <div className="area-genero">
+          <div className="container-genero">
+            {/* <p>Filtrar por:</p> */}
+            <h2>Gêneros</h2>
+            {isFetchingGenero && <p>Carregando</p>}
+            {generos?.map(genero => {
+              return (
+                <li className="lista-genero" key={genero.id}>
+                  <input id={`genero-${genero.name}`} type="checkbox" onChange={handleCheck} name="genero" value={genero.id} />
+                  <label htmlFor={`genero-${genero.name}`}>{genero.name}</label>
 
-              </li>
-            )
-          })}
-          <Botao>
-            Aplicar Filtro
-          </Botao>
+                </li>
+              )
+            })}
+
+            {/* 
+            <button  //</div>onClick={() => {
+              // const {data: filmesPesquisaGenero, isFetching: isFetchingFilmesPesquisaGenero} = testeGenero<Filme[]>(updatedList.toString())
+            //}}>
+            >
+              teste
+            </button> */}
+
+
+            <Botao>
+              Aplicar Filtro
+            </Botao>
+          </div>
         </div>
 
         <div className="container-filmes">
@@ -80,3 +113,4 @@ export function Home() {
     </>
   )
 }
+

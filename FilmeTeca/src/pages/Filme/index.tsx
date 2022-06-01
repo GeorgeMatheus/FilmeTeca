@@ -84,42 +84,42 @@ export function DetalhesFilme() {
           </div>
         </div>
       </div>
-      <div>
+      <div className="container-comentarios">
+        <div className="area-principal">
+          <div className="cabecalho-comentarios">
+            <h1>Comentários</h1>
+          
+            <span className="qtd-comentarios">{filme?.comentarios.length} Comentários</span>
+          </div>
 
-        <div className="cabecalho-comentarios">
-          <h1>Comentários</h1>
-        
-          <span className="qtd-comentarios">{filme?.comentarios.length} Comentários</span>
-        </div>
+          <form className="novo-comentario">
+            <img src={userImg} alt="imagem de perfil"/>
+            <textarea rows={5} name="" id="" placeholder="Participe da discussão..." />
+            <button>Comentar</button>
+          </form>
+      
+          <div className="comentarios">
 
-        <form className="novo-comentario">
-          <img src={userImg} alt="imagem de perfil"/>
-          <textarea rows={5} name="" id="" placeholder="Participe da discussão..." />
-          <button>Comentar</button>
-        </form>
-    
-        <div className="comentarios">
+            {(filme?.comentarios)?.map(comentario => {
+              return (
+                <li key={comentario.texto}>
+                  
+                  <div className="usuario-comentario">
+                    <img src={userImg} alt="imagem de perfil"/>
 
-          {(filme?.comentarios)?.map(comentario => {
-            return (
-              <li key={comentario.texto}>
-                
-                <div className="usuario-comentario">
-                  <img src={userImg} alt="imagem de perfil"/>
+                    <div>
+                      <a href="#" className="nome-usuario">{comentario.user.nome}</a>
+                      <span className="data-comentario">{`${comentario.data.slice(8,10)}/${comentario.data.slice(5,7)}/${comentario.data.slice(0,4)}`}</span>
+                      <span className="hora-comentario">{`${comentario.data.slice(11,16)}`}</span>
+                      <p className="comentario">{comentario.texto}</p>
+                    </div>
 
-                  <div>
-                    <a href="#" className="nome-usuario">{comentario.user.nome}</a>
-                    <span className="data-comentario">{`${comentario.data.slice(8,10)}/${comentario.data.slice(5,7)}/${comentario.data.slice(0,4)}`}</span>
-                    <span className="hora-comentario">{`${comentario.data.slice(11,16)}`}</span>
-                    <p className="comentario">{comentario.texto}</p>
                   </div>
-
-                </div>
-              </li>
-            )
-          })}
+                </li>
+              )
+            })}
+          </div>
         </div>
-        
       </div>
     </>
   )
