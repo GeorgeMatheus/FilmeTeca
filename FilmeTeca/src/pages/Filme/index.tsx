@@ -93,8 +93,10 @@ export function DetalhesFilme() {
           </div>
 
           <form className="novo-comentario">
-            <img src={userImg} alt="imagem de perfil"/>
-            <textarea rows={5} name="" id="" placeholder="Participe da discussão..." />
+            <div>
+              {/* <img src={userImg} alt="imagem de perfil"/> */}
+              <textarea rows={5} name="" id="" placeholder="Participe da discussão..." />
+            </div>
             <button>Comentar</button>
           </form>
       
