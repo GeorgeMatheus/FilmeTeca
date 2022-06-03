@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
+import { AuthContext } from "../../contexts/auth"
 import { Link } from "react-router-dom"
 import './style.scss'
 import { Navbar } from "../../components/Navbar/Navbar"
@@ -8,39 +9,49 @@ import { Botao } from "../../components/Botao"
 
 export function Login() {
 
+  const { autenticated, login } = useContext(AuthContext)
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+
+    console.log("Login", {email, password})
+    login(email, password)
+  }
 
   return (
     <>
       <Navbar />
-        <Layout>
-          <form className="login-form">
-            <span className="login-form-title">Bem Vindo!</span>
+      <Layout>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <span className="login-form-title">Bem Vindo!</span>
 
-            <div className="wrap-input">
-              <input className={email != "" ? "input has-val" : "input"} type="email" value={email} onChange={e => setEmail(e.target.value)} />
-              <span className="focus-input" data-placeholder="Email"></span>
-            </div>
+          <div className="wrap-input">
+            <input className={email != "" ? "input has-val" : "input"} type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <span className="focus-input" data-placeholder="Email"></span>
+          </div>
 
-            <div className="wrap-input">
-              <input className={password != "" ? "input has-val" : "input"} type="password" value={password} onChange={e => setPassword(e.target.value)} />
-              <span className="focus-input" data-placeholder="Senha"></span>
-            </div>
+          <div className="wrap-input">
+            <input className={password != "" ? "input has-val" : "input"} type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <span className="focus-input" data-placeholder="Senha"></span>
+          </div>
 
-            <div className="container-login-form-btn">
-              <Botao>Entrar</Botao>
+          <div className="container-login-form-btn">
+            <Botao>Entrar</Botao>
 
-              {/* <button className="login-form-btn">Entrar</button> */}
-            </div>
+            {/* <button className="login-form-btn">Entrar</button> */}
+          </div>
 
-            <div className="novo-cadastro">
-              <span className="realiza-cadastro">Não possui conta?</span>
-              <Link to={`/cadastrar`} className="link-cria-cadastro">Criar Conta</Link>
-            </div>
+          <div className="novo-cadastro">
+            <span className="realiza-cadastro">Não possui conta?</span>
+            <Link to={`/cadastrar`} className="link-cria-cadastro">Criar Conta</Link>
+          </div>
 
-          </form>
-        </Layout>
+        </form>
+      </Layout>
     </>
 
   );

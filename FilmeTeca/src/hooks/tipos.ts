@@ -53,3 +53,8 @@ export interface Comentario {
 export interface LayoutComponent {
   children: ReactNode;
 }
+
+
+export interface TypeAuthProvider {
+  children: ReactNode;
+}
