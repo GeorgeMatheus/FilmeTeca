@@ -22,7 +22,11 @@ export function AppRoutes() {
 
   const Private = (props: TypeAuthProvider) => {
 
-    const { autenticated } = useContext(AuthContext)
+    const { autenticated , loading } = useContext(AuthContext)
+
+    if (loading) {
+      return <div className="loading">Carregando...</div>
+    }
 
     if(!autenticated) {
       return <Navigate to="/login" />

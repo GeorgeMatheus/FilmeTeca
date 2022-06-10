@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import axios from 'axios'
 
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: 'https://api-filmeteca.herokuapp.com/'
 })
 
@@ -65,6 +65,12 @@ export function useApi< T = unknown>(url: string) {
   }, [])
 
   return { data, error, isFetching }
+
+}
+
+
+export const createSession = async (email: string, password: string) =>{
+  return api.post("login/", {email, password})
 
 }
 
