@@ -69,8 +69,8 @@ export function useApi< T = unknown>(url: string) {
 }
 
 
-export const createSession = async (email: string, password: string) =>{
-  return api.post("login/", {email, password})
+export const createSession = async (email: string, senha: string) =>{
+  return api.post("login", {email, senha})
 
 }
 

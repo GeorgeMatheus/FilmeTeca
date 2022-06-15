@@ -37,9 +37,9 @@ export function AuthProvider(props:TypeAuthProvider) {
   }, [])
   
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, senha: string) => {
 
-    const response = await createSession(email, password)
+    const response = await createSession(email, senha)
 
     console.log("Login auth", response.data)
 
@@ -58,6 +58,7 @@ export function AuthProvider(props:TypeAuthProvider) {
 
     // api.defaults.headers.Authorization = `Bearer ${token}`
 
+    navigate("/perfil")
     
   }
   

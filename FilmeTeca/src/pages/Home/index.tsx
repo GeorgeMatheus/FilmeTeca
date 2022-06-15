@@ -13,7 +13,7 @@ import { Rodape } from "../../components/Rodape";
 export function Home() {
 
   const image_path = 'https://image.tmdb.org/t/p/w500/'
-  let updatedList: Array = ['']
+  let updatedList = []
 
   const { data: filmes, isFetching } = useApi<Filme[]>('filme/populares')
 

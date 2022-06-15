@@ -12,14 +12,14 @@ export function Login() {
   const { autenticated, login } = useContext(AuthContext)
 
   const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [senha, setSenha] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
 
-    console.log("Login", {email, password})
-    login(email, password)
+    console.log("Login", {email, senha})
+    login(email, senha)
   }
 
   return (
@@ -35,7 +35,7 @@ export function Login() {
           </div>
 
           <div className="wrap-input">
-            <input className={password != "" ? "input has-val" : "input"} type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input className={senha != "" ? "input has-val" : "input"} type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
             <span className="focus-input" data-placeholder="Senha"></span>
           </div>
 
