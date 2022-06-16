@@ -7,8 +7,11 @@ footer {
   background: var(--roxo-escuro);
   border-top: 1px solid var(--roxo-claro);
   padding: 10px 40px;
-  color: white;
   display: flex;
   align-items: center;
-  justify-content: center;
+  color: white;
+  justify-content: space-between;
+  .copyright{
+    color: var(--roxo-claro);
+  }
 }
