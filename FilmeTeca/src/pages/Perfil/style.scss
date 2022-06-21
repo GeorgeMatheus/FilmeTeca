@@ -1,0 +1,102 @@
+:root {
+    --roxo-escuro: #10002b;
+    --roxo-claro: #7b2cbf;
+}
+
+.container{
+    min-height: 100%;
+    position: relative;
+}
+
+.containerPage{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    color: white;
+    margin-top: 1.5%;
+    height: 100%;
+
+    // este padding é para acompanhar o tamanho do footer
+    padding-bottom: 35px;
+}
+
+.profileCard{
+    background-color: var(--roxo-claro);
+    box-shadow: 0 4px 8px 0 var(--roxo-escuro);
+    transition: 0.3s;
+
+    height: 45vh;
+    padding: 2%;
+    margin: 5%;
+}
+
+.photo{
+    display: block;
+    margin: auto;
+    border: 3px solid white;
+    width: 50%;
+    // box-shadow: 0px 8px 15px 0 white;
+}
+
+.profileInfo{
+    padding: 4px 16px;
+}
+
+h4{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: larger;
+    justify-content: center;
+}
+
+.titulo{
+    font-family: Impact;
+}
+
+.favoritos_header{
+    background-color: var(--roxo-claro);
+    box-shadow: 0 4px 8px 0 var(--roxo-escuro);
+
+    margin-left: 6%;
+    width: 150px;
+    font-size:x-large;
+    display: flex;
+    margin-bottom: 0.7%;
+    
+    padding: 10px;
+}
+.favoritos_container{
+    background-color: var(--roxo-claro);
+    border: 2px solid var(--roxo-escuro);
+    box-shadow: 0 4px 8px 0 var(--roxo-escuro);
+
+    margin: 5%;
+    margin-top: 0;
+    margin-bottom: 1.5%;
+    height: 35vh;
+    overflow: auto;
+    padding: 5px;
+}
+
+.interesses_header{
+    background-color: var(--roxo-escuro);
+    box-shadow: 0 4px 8px 0 var(--roxo-claro);
+
+    margin-left: 6%;
+    width: 150px;
+    font-size:x-large;
+    display: flex;
+    margin-bottom: 0.7%;
+    
+    padding: 10px;
+}
+.interesses_container{
+    background-color: var(--roxo-escuro);
+    border: 2px solid var(--roxo-claro);
+    box-shadow: 0 4px 8px 0 var(--roxo-claro);
+
+    margin: 5%;
+    margin-top: 0;
+    margin-bottom: 2%;
+    height: 35vh;
+    overflow: auto;
+    padding: 5px;
+}

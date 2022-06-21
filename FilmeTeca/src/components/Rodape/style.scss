@@ -4,13 +4,23 @@
 }
 
 footer {
-  background: var(--roxo-escuro);
-  border-top: 1px solid var(--roxo-claro);
-  padding: 10px 40px;
-  display: flex;
-  align-items: center;
-  color: white;
-  justify-content: space-between;
+  background: var(--roxo-escuro); //cor de fundo
+  border-top: 3px solid var(--roxo-claro); //
+  
+  height: 55px;
+
+  padding: 5px 10px; //margem que o conteúdo terá à borda da propria div
+  color: white; //cor padrao do conteúdo
+
+  display: flex; //faz tudo ficar na mesma linha
+  align-items: center; //alinha verticalmente
+  justify-content: space-between; //alinha horizontalmente
+  
+  position: fixed;
+
+  bottom: 0; //localizar-se à 0 de distancia do bottom
+  width: 100vw; //ter a largura de 100% da view width disponivel (largura maxima da pagina)
+  
   .copyright{
     color: var(--roxo-claro);
   }

@@ -39,7 +39,7 @@ export function AppRoutes() {
     <Router>
       <AuthProvider>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Perfil />} />{/*trocar o Perfil para Home*/}
           <Route path="/filme/:id" element={<DetalhesFilme />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastrar" element={<Cadastrar />} />
