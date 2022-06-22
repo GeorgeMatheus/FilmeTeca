@@ -12,13 +12,6 @@ interface CommonHeaderProperties extends HeadersDefaults {
 export const AuthContext = createContext(null)
 
 
-type User = {
-  id: string;
-  name: string;
-  login: string;
-}
-
-
 export function AuthProvider(props:TypeAuthProvider) {
   
   const [user, setUser] = useState()

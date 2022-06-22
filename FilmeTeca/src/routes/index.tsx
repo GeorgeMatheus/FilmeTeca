@@ -13,27 +13,27 @@ import { DetalhesFilme } from "../pages/Filme/"
 import { Login } from "../pages/Login"
 import { Cadastrar } from "../pages/Cadastrar"
 import { Perfil } from "../pages/Perfil"
-
-import { AuthProvider, AuthContext } from "../contexts/auth";
+import { AuthProvider } from "../contexts/Auth/AuthProvider"
+import { RequireAuth } from "../contexts/Auth/RequireAuth";
 
 
 
 export function AppRoutes() {
 
-  const Private = (props: TypeAuthProvider) => {
+  // const Private = (props: TypeAuthProvider) => {
 
-    const { autenticated , loading } = useContext(AuthContext)
+  //   const { autenticated , loading } = useContext(AuthContext)
 
-    if (loading) {
-      return <div className="loading">Carregando...</div>
-    }
+  //   if (loading) {
+  //     return <div className="loading">Carregando...</div>
+  //   }
 
-    if(!autenticated) {
-      return <Navigate to="/login" />
-    }
+  //   if(!autenticated) {
+  //     return <Navigate to="/login" />
+  //   }
 
-    return props.children
-  }
+  //   return props.children
+  // }
 
   return (
     <Router>
@@ -43,7 +43,7 @@ export function AppRoutes() {
           <Route path="/filme/:id" element={<DetalhesFilme />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastrar" element={<Cadastrar />} />
-          <Route path="/perfil" element={<Private><Perfil /></Private>} />
+          <Route path="/perfil" element={<RequireAuth><Perfil /></RequireAuth>} />
         </Routes>
       </AuthProvider >
     </Router>

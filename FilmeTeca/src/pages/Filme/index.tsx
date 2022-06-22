@@ -15,7 +15,7 @@ export function DetalhesFilme() {
   const image_path = 'https://image.tmdb.org/t/p/w500/'
   const image_path_original = 'https://image.tmdb.org/t/p/original/'
 
-  const { data: filme, isFetching } = infoFilme<Filme>('filme?id=', id)
+  const { data: filme, isFetching } = infoFilme<Filme>('filme/', id)
 
 
 

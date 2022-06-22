@@ -15,14 +15,14 @@ export function Home() {
   const image_path = 'https://image.tmdb.org/t/p/w500/'
   let updatedList = []
 
-  const { data: filmes, isFetching } = useApi<Filme[]>('filme/populares')
+  const { data: filmes, isFetching } = useApi<Filme[]>('filme/populares/1')
 
   const { data: generos, isFetching: isFetchingGenero } = listarGeneros<Genero[]>('genero')
 
   const [checked, setChecked] = useState([])
 
 
-  const handleCheck = (event) => {
+  const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
 
     updatedList = [...checked]
 
@@ -56,15 +56,6 @@ export function Home() {
               )
             })}
 
-            {/* 
-            <button  //</div>onClick={() => {
-              // const {data: filmesPesquisaGenero, isFetching: isFetchingFilmesPesquisaGenero} = testeGenero<Filme[]>(updatedList.toString())
-            //}}>
-            >
-              teste
-            </button> */}
-
-
             <Botao>
               Aplicar Filtro
             </Botao>
@@ -83,7 +74,7 @@ export function Home() {
                 <li className="card-filme" key={filme.id.toString()}>
 
                   <div className="img-card">
-                    <Link to={`/filme/${filme.id}`}><img src={`${image_path}${filme.poster_path}`} alt="Capa Filme"></img></Link>
+                    <Link to={`filme/${filme.id}`}><img src={`${image_path}${filme.poster_path}`} alt="Capa Filme"></img></Link>
 
                     <div className="pontuacao-filme">
                       <div className="pontuacao-info">

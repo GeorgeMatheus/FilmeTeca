@@ -1,43 +1,93 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
+import { User } from "../types/User"
 
 
 export const api = axios.create({
   baseURL: 'https://api-filmeteca.herokuapp.com/'
 })
 
-// const teste = axios.create({
-//   baseURL: 'https://api.themoviedb.org/3/discover/movie?api_key=d7251e004d1f3faea8a9b0f9405646b6&language=pt-BR&sort_by=popularity.desc&include_adult=false&with_genres='
-// })
 
 
-// export function testeGenero<T = unknown>(url: string) {
- 
-//   // Dados genericos recebido de uma API
-//   const [data, setData] = useState<T | null>(null)
+export const criarAutenticacao = () => ({
 
-//   // Estado da requisição
-//   const [isFetching, setIsFetching] = useState(true)
+  validateToken: async (token: string) => {
+    const response = await api.post("validacao", {token})
+  },
 
-//   //Caso a requisição falhe é enviado um erro
-//   const [error, setError] = useState<Error | null>(null);
+  login: async (email: string, senha: string) => {
+    const response = await api.post("login", {email, senha})
+    return response.data
+  },
 
-//   useEffect(() => {
-//     teste.get(url)
-//       .then(response => {
-//         setData(response.data.results)
-//       })
-//       .catch ( err => {
-//         setError(err);
-//       })
-//       .finally(() => {
-//         setIsFetching(false)
-//       })
-//   }, [])
+  recuperaUsuario: async (email: string, senha: string, token:string) =>{
 
-//   return { data, error, isFetching }
 
-// }
+    
+    // api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    api.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+    // // api.defaults.headers.Authorization = `Bearer ${token}`
+
+    // api.defaults.headers.get['Content-Type'] = 'application/json'
+    // const dados = {email: `${email}`, senha: `${senha}`}
+
+    // console.log(email, senha)
+    // api.defaults.headers.common = {'Authorization':`${token}`}
+    // const response = await api.get("auth", {
+    //   data: {
+    //     email: `${email}`,
+    //     senha: `${senha}`
+    //   }
+    // }).then((resposnse))
+
+
+    const [usuario, setUsuario] = useState(null)
+  
+    // Estado da requisição
+    const [isFetching, setIsFetching] = useState(true)
+  
+    //Caso a requisição falhe é enviado um erro
+    const [error, setError] = useState<Error | null>(null);
+    
+    useEffect(() => {
+      const recUsuario = async () => {
+        await api.get("auth",{data: {email, senha}})
+        .then(response => {
+          setUsuario(response.data)
+        })
+      }
+
+      recUsuario()
+    })
+  
+    // useEffect(() => {
+    //   api.get("auth",{data: {email, senha}})
+    //     .then(response => {
+    //       setUsuario(response.data)
+    //     })
+    // }, [])
+
+    return usuario
+  },
+
+  logout: async () => {
+    const response = await api.post("logout")
+    return response.data
+  },
+
+  cadastro: async (nome: string, email: string, senha:string) => {
+    const response = await api.post("cadastro", {nome, email, senha})
+    return response.data
+  }
+
+})
+
+
+export const createSession = async (email: string, senha: string) =>{
+  return api.post("login", {email, senha})
+
+}
+
 
 
 export function useApi< T = unknown>(url: string) {
@@ -50,6 +100,7 @@ export function useApi< T = unknown>(url: string) {
 
   //Caso a requisição falhe é enviado um erro
   const [error, setError] = useState<Error | null>(null);
+  
 
   useEffect(() => {
     api.get(url)
@@ -69,10 +120,39 @@ export function useApi< T = unknown>(url: string) {
 }
 
 
-export const createSession = async (email: string, senha: string) =>{
-  return api.post("login", {email, senha})
+export function usuarioLogado< T = unknown>(email: string, senha:string, token: string) {
+
+  // Dados genericos recebido de uma API
+  const [data, setData] = useState<T | null>(null)
+  
+  // Estado da requisição
+  const [isFetching, setIsFetching] = useState(true)
+
+  //Caso a requisição falhe é enviado um erro
+  const [error, setError] = useState<Error | null>(null);
+
+  api.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+  const dados = {email: `${email}`, senha: `${senha}`}
+
+  useEffect(() => {
+    api.get("auth", dados)
+      .then(response => {
+        console.log(response.data)
+        setData(response.data)
+      })
+      .catch ( err => {
+        setError(err);
+      })
+      .finally(() => {
+        setIsFetching(false)
+      })
+  }, [])
+
+  return { data, error, isFetching }
 
 }
+
+
 
 export function listarGeneros< T = unknown>(url: string) {
 

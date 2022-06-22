@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react"
-import { AuthContext } from "../../contexts/auth"
-import { Link } from "react-router-dom"
+import { AuthContext } from "../../contexts/Auth/AuthContext"
+import { Link, useNavigate } from "react-router-dom"
 import './style.scss'
 import { Navbar } from "../../components/Navbar/Navbar"
 import { Layout } from "../../components/Layout"
@@ -9,17 +9,22 @@ import { Botao } from "../../components/Botao"
 
 export function Login() {
 
-  const { autenticated, login } = useContext(AuthContext)
-
+  const auth = useContext(AuthContext)
+  const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [senha, setSenha] = useState("")
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    const logado = await auth.login(email, senha)
 
-    console.log("Login", {email, senha})
-    login(email, senha)
+    if(logado) {
+      navigate('perfil')
+    }else{
+      alert("Usuário ou senha errado")
+    }
   }
 
   return (
@@ -30,12 +35,12 @@ export function Login() {
           <span className="login-form-title">Bem Vindo!</span>
 
           <div className="wrap-input">
-            <input className={email != "" ? "input has-val" : "input"} type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input className={email != "" ? "input has-val" : "input"} type="email" value={email} onChange={e => setEmail(e.target.value)} />
             <span className="focus-input" data-placeholder="Email"></span>
           </div>
 
           <div className="wrap-input">
-            <input className={senha != "" ? "input has-val" : "input"} type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
+            <input className={senha != "" ? "input has-val" : "input"} type="password" value={senha} onChange={e => setSenha(e.target.value)} />
             <span className="focus-input" data-placeholder="Senha"></span>
           </div>
 
