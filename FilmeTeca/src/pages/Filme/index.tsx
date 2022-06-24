@@ -15,7 +15,7 @@ export function DetalhesFilme() {
   const image_path = 'https://image.tmdb.org/t/p/w500/'
   const image_path_original = 'https://image.tmdb.org/t/p/original/'
 
-  const { data: filme, isFetching } = infoFilme<Filme>('filme/', id)
+  const { data: filme, isFetching } = infoFilme<Filme>("filme/", id)
 
 
 
@@ -26,6 +26,8 @@ export function DetalhesFilme() {
 
       <div>
         {isFetching && <p>Carregando...</p>}
+
+        {console.log(filme)}
 
         <div className="container-Filme" style={{
           backgroundImage: `url(${image_path_original}${filme?.backdrop_path})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center center", backgroundColor: "rgba(0,0,0,0.8)", backgroundBlendMode: "darken"
@@ -44,7 +46,7 @@ export function DetalhesFilme() {
             <div className="generos">
               {(filme?.genres)?.map(genero => {
                 return (
-                  <li key={genero.id.toString()}>
+                  <li key={genero.id}>
                     {genero.name}
                   </li>
                 )
@@ -79,7 +81,7 @@ export function DetalhesFilme() {
 
             <h2 className="title-sinopse">Sinopse</h2>
             <p className="sinopse">{filme?.overview}</p>
-            <span className="diretor"><strong>Diretor:</strong> {filme?.diretor.name}</span>
+            {/* <span className="diretor"><strong>Diretor:</strong> {filme?.diretor.name}</span> */}
 
           </div>
         </div>
@@ -89,7 +91,7 @@ export function DetalhesFilme() {
           <div className="cabecalho-comentarios">
             <h1>Comentários</h1>
           
-            <span className="qtd-comentarios">{filme?.comentarios.length} Comentários</span>
+            <span className="qtd-comentarios">{filme?.comentarios?.length} Comentários</span>
           </div>
 
           <form className="novo-comentario">

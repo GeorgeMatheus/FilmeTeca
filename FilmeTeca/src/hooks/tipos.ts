@@ -1,14 +1,12 @@
 import { ReactNode } from "react";
 
-export interface Genero {
-  id: number;
-  name: string;
-}
+
 
 export interface Diretor {
   id: number;
   name: string;
   job: string;
+  profile_path: string;
 }
 
 export interface Data {
@@ -17,19 +15,28 @@ export interface Data {
   ano: string;
 }
 
+export interface Genero {
+  id: number;
+  name: string;
+}
 
 export interface Filme {
-  id: string;
-  backdrop_path: string;
-  genres: Array<Genero>;
+  id: number;
   title: string;
+  genres: Array<Genero>;
+  release_date: string;
   overview: string;
   tagline: string;
+  runtime: string;
   status: string;
+  diretor: Diretor;
+
+
+  backdrop_path: string;
   poster_path: string;
   vote_average: string;
-  release_date: string;
-  diretor: Diretor;
+
+  
   comentarios: Array<Comentario>
 }
 

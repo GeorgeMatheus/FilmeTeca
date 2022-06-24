@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 
 import { Home } from "../pages/Home/"
-import { DetalhesFilme } from "../pages/Filme/"
+import { DetalhesFilme } from "../pages/Filme"
 import { Login } from "../pages/Login"
 import { Cadastrar } from "../pages/Cadastrar"
 import { Perfil } from "../pages/Perfil"
@@ -19,21 +19,6 @@ import { RequireAuth } from "../contexts/Auth/RequireAuth";
 
 
 export function AppRoutes() {
-
-  // const Private = (props: TypeAuthProvider) => {
-
-  //   const { autenticated , loading } = useContext(AuthContext)
-
-  //   if (loading) {
-  //     return <div className="loading">Carregando...</div>
-  //   }
-
-  //   if(!autenticated) {
-  //     return <Navigate to="/login" />
-  //   }
-
-  //   return props.children
-  // }
 
   return (
     <Router>

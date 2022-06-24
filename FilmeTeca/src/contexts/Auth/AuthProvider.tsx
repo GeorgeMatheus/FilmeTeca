@@ -30,9 +30,6 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     setUser(null)
   }
 
-  const cadastro = (nome: string, email: string, senha: string) => {
-
-  }
 
   return (
     <AuthContext.Provider value={{user, login, logout}}>

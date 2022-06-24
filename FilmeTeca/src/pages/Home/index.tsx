@@ -66,6 +66,9 @@ export function Home() {
           <h1 className="title">Filmes Populares</h1>
           <Formulario />
 
+
+          
+
           <div className="lista-filmes">
             {/* filmes? - Pode ser nulo pois a requisição a API ainda pode não ter sido carregado e quando carregar apresentar.*/}
             {isFetching && <p>Carregando...</p>}
