@@ -1,23 +1,37 @@
-import { useState } from "react";
-import { User } from "../../types/User";
+import { useEffect, useState } from "react";
 import { criarAutenticacao } from "../../hooks/useApi";
 import { AuthContext } from "./AuthContext";
-import { usuarioLogado } from "../../hooks/useApi";
+import { Usuario } from "../../hooks/tipos";
+import { useNavigate } from "react-router-dom";
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<Usuario | null>(null)
   const api = criarAutenticacao();
+
+
+  useEffect(() =>{
+    const validarToken = async () => {
+      const storageData = localStorage.getItem('authToken')
+
+      if(storageData) {
+        const data = await api.recuperaUsuario(storageData)
+
+        if(data) {
+          setUser(data)
+        }
+      }
+    }
+    validarToken()
+  }, [])
 
   const login = async (email: string, senha: string) => {
     const token = await api.login(email, senha)
 
     if(token){
-
-      const usu = await api.recuperaUsuario(email, senha, token)
-
-      console.log(usu)
-
+      const user = await api.recuperaUsuario(token)
+      setUser(user)
+      setToken(token)
       return true
 
     }
@@ -26,8 +40,14 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   }
 
   const logout = async () => {
-    await api.logout()
+    // await api.logout()
     setUser(null)
+    setToken('')
+
+  }
+
+  const setToken = (token: string) => {
+    localStorage.setItem('authToken', token)
   }
 
 

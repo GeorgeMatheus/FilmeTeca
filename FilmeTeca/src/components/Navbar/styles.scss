@@ -40,3 +40,40 @@ nav {
   background-color: #7b2cbf;
 
 }
+
+.usuario-logado {
+  color: white;
+  cursor: pointer;
+}
+
+.usuario-logado span {
+  margin-left: 2px;
+}
+
+nav ul {
+  position: absolute;
+  list-style: none;
+  background-color: #10002b;
+  display: block;
+  border-radius: 3px;
+  display: none;
+}
+
+[id=btn]:checked + ul {
+  display: block;
+}
+
+nav ul li {
+  line-height: 20px;
+  padding: 10px 20px;
+
+}
+
+nav input {
+  display: none;
+}
+
+nav ul li span {
+  color: #fff;
+  cursor: pointer;
+}

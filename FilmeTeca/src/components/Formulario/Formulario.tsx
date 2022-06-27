@@ -14,9 +14,9 @@ export function Formulario() {
 
     console.log(pesquisa)
 
-    // const { data: filmes, isFetching } = await useApi<Filme[]>(`filme/search/${pesquisa}`)
+    const { data: filmes, isFetching } = useApi<Filme[]>(`filme/search/${pesquisa}`)
 
-
+    return filmes
   }
 
 

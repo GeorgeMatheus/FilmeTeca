@@ -4,7 +4,7 @@ import './style.scss'
 import { Link } from 'react-router-dom'
 import { Navbar } from '../../components/Navbar/Navbar'
 import { Formulario } from '../../components/Formulario/Formulario'
-import { FaStar } from 'react-icons/fa'
+import { FaSearch, FaStar } from 'react-icons/fa'
 import { Filme, Genero, LayoutComponent } from '../../hooks/tipos'
 import { Botao } from "../../components/Botao";
 import { Rodape } from "../../components/Rodape";
@@ -20,6 +20,18 @@ export function Home() {
   const { data: generos, isFetching: isFetchingGenero } = listarGeneros<Genero[]>('genero')
 
   const [checked, setChecked] = useState([])
+
+  const [pesquisa, setPesquisa] = useState("")
+  
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    console.log(pesquisa)
+
+    // const { data: busca, isFetching } = useApi<Filme[]>(`filme/search/${pesquisa}`)
+    
+    // console.log(busca)
+  }
 
 
   const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,10 +76,18 @@ export function Home() {
 
         <div className="container-filmes">
           <h1 className="title">Filmes Populares</h1>
-          <Formulario />
+          {/* <Formulario /> */}
+
+          <form className="search-box" onSubmit={handleSubmit}>
+            <input placeholder="Pesquise um filme" type="text" value={pesquisa} onChange={e => setPesquisa(e.target.value)}/>
+
+            <button type="submit">
+              <FaSearch />
+            </button>
+
+          </form>
 
 
-          
 
           <div className="lista-filmes">
             {/* filmes? - Pode ser nulo pois a requisição a API ainda pode não ter sido carregado e quando carregar apresentar.*/}

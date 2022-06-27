@@ -44,16 +44,19 @@ export interface Usuario {
   id: number;
   nome: string;
   email: string;
-  comentarios: Array<Comentario>;
-  interesses: Array<Filme>;
-  favoritos: Array<Filme>;
+  dataCadastro: string;
+  comentarios?: Array<Comentario>;
+  interesses?: Array<Filme>;
+  favoritos?: Array<Filme>;
 }
 
 
 export interface Comentario {
+  id: number;
   texto: string;
-  data: string;
-  user: Usuario;
+  dataCadastro: string;
+  idFilme: number;
+  usuario: Usuario;
 
 }
 

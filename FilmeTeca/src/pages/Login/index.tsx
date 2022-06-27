@@ -21,7 +21,7 @@ export function Login() {
     const logado = await auth.login(email, senha)
 
     if(logado) {
-      navigate('perfil')
+      navigate('/perfil')
     }else{
       alert("Usuário ou senha errado")
     }

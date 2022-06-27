@@ -1,11 +1,13 @@
 import { useParams } from "react-router-dom"
 import { Navbar } from "../../components/Navbar/Navbar"
-import { infoFilme } from "../../hooks/useApi"
+import { comentarios, infoFilme } from "../../hooks/useApi"
 import './style.scss'
 import { Filme, Data } from '../../hooks/tipos'
 import { FaHeart, FaBookmark, FaStar, FaPlay } from 'react-icons/fa'
 import { StarRating } from "../../components/rating/StarRating"
 import userImg from "../../assets/imagem_perfil.png"
+import { useContext, useState } from "react"
+import { AuthContext } from "../../contexts/Auth/AuthContext"
 
 
 
@@ -14,8 +16,36 @@ export function DetalhesFilme() {
   const { id } = useParams()
   const image_path = 'https://image.tmdb.org/t/p/w500/'
   const image_path_original = 'https://image.tmdb.org/t/p/original/'
+  const [comentario, setComentario] = useState("")
+  const auth = useContext(AuthContext)
+  const api = comentarios()
 
   const { data: filme, isFetching } = infoFilme<Filme>("filme/", id)
+ 
+
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const idFilme = parseInt(id)
+
+
+    if(auth.user) {
+      if(comentario) {
+        const token = localStorage.getItem('authToken')
+
+        const data = await api.novoComentario(comentario, idFilme, token)
+
+
+        window.location.href = window.location.href
+
+        // console.log(data)
+      }
+
+    }else{
+      alert("Faça login para comentar!")
+    }
+
+  }
 
 
 
@@ -26,8 +56,6 @@ export function DetalhesFilme() {
 
       <div>
         {isFetching && <p>Carregando...</p>}
-
-        {console.log(filme)}
 
         <div className="container-Filme" style={{
           backgroundImage: `url(${image_path_original}${filme?.backdrop_path})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center center", backgroundColor: "rgba(0,0,0,0.8)", backgroundBlendMode: "darken"
@@ -94,10 +122,9 @@ export function DetalhesFilme() {
             <span className="qtd-comentarios">{filme?.comentarios?.length} Comentários</span>
           </div>
 
-          <form className="novo-comentario">
+          <form className="novo-comentario" onSubmit={handleSubmit}>
             <div>
-              {/* <img src={userImg} alt="imagem de perfil"/> */}
-              <textarea rows={5} name="" id="" placeholder="Participe da discussão..." />
+              <textarea onChange={e => setComentario(e.target.value)} placeholder="Participe da discussão..." />
             </div>
             <button>Comentar</button>
           </form>
@@ -106,15 +133,15 @@ export function DetalhesFilme() {
 
             {(filme?.comentarios)?.map(comentario => {
               return (
-                <li key={comentario.texto}>
+                <li key={comentario.id}>
                   
                   <div className="usuario-comentario">
                     <img src={userImg} alt="imagem de perfil"/>
 
                     <div>
-                      <a href="#" className="nome-usuario">{comentario.user.nome}</a>
-                      <span className="data-comentario">{`${comentario.data.slice(8,10)}/${comentario.data.slice(5,7)}/${comentario.data.slice(0,4)}`}</span>
-                      <span className="hora-comentario">{`${comentario.data.slice(11,16)}`}</span>
+                      <a href="#" className="nome-usuario">{comentario.usuario.nome}</a>
+                      <span className="data-comentario">{`${comentario.dataCadastro.slice(8,10)}/${comentario.dataCadastro.slice(5,7)}/${comentario.dataCadastro.slice(0,4)}`}</span>
+                      <span className="hora-comentario">{`${comentario.dataCadastro.slice(11,16)}`}</span>
                       <p className="comentario">{comentario.texto}</p>
                     </div>
 
