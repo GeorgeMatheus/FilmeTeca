@@ -76,18 +76,7 @@ export function Home() {
 
         <div className="container-filmes">
           <h1 className="title">Filmes Populares</h1>
-          {/* <Formulario /> */}
-
-          <form className="search-box" onSubmit={handleSubmit}>
-            <input placeholder="Pesquise um filme" type="text" value={pesquisa} onChange={e => setPesquisa(e.target.value)}/>
-
-            <button type="submit">
-              <FaSearch />
-            </button>
-
-          </form>
-
-
+          <Formulario />
 
           <div className="lista-filmes">
             {/* filmes? - Pode ser nulo pois a requisição a API ainda pode não ter sido carregado e quando carregar apresentar.*/}

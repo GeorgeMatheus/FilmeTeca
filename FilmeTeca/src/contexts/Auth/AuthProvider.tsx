@@ -50,9 +50,19 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     localStorage.setItem('authToken', token)
   }
 
+  const cadastro = async (nome: string, email:string, senha:string) => {
+    const cadastro = await api.cadastro(nome, email, senha)
+
+    if(cadastro) {
+      return true
+    }
+
+    return false
+  }
+
 
   return (
-    <AuthContext.Provider value={{user, login, logout}}>
+    <AuthContext.Provider value={{user, login, logout, cadastro}}>
       {children}
     </AuthContext.Provider>
   )

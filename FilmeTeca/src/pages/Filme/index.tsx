@@ -8,11 +8,14 @@ import { StarRating } from "../../components/rating/StarRating"
 import userImg from "../../assets/imagem_perfil.png"
 import { useContext, useState } from "react"
 import { AuthContext } from "../../contexts/Auth/AuthContext"
+import Modal from "react-modal"
 
+Modal.setAppElement('#root');
 
 
 export function DetalhesFilme() {
 
+  
   const { id } = useParams()
   const image_path = 'https://image.tmdb.org/t/p/w500/'
   const image_path_original = 'https://image.tmdb.org/t/p/original/'
@@ -20,7 +23,20 @@ export function DetalhesFilme() {
   const auth = useContext(AuthContext)
   const api = comentarios()
 
+
   const { data: filme, isFetching } = infoFilme<Filme>("filme/", id)
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  
  
 
 
@@ -37,16 +53,29 @@ export function DetalhesFilme() {
 
 
         window.location.href = window.location.href
-
-        // console.log(data)
       }
 
     }else{
       alert("Faça login para comentar!")
     }
-
   }
 
+  const handleApagarComentario = async (id:number) => {
+    const token = localStorage.getItem('authToken')
+    console.log(id)
+
+    const data = await api.excluirComentario(id, token)
+
+    window.location.href = window.location.href
+  }
+
+  const handleEditarComentario = (comentario:object) => {
+    const token = localStorage.getItem('authToken')
+    console.log(comentario)
+
+    openModal()
+
+  }
 
 
   return (
@@ -143,12 +172,33 @@ export function DetalhesFilme() {
                       <span className="data-comentario">{`${comentario.dataCadastro.slice(8,10)}/${comentario.dataCadastro.slice(5,7)}/${comentario.dataCadastro.slice(0,4)}`}</span>
                       <span className="hora-comentario">{`${comentario.dataCadastro.slice(11,16)}`}</span>
                       <p className="comentario">{comentario.texto}</p>
-                    </div>
 
+                    </div>
+                    <div>
+                      {(auth.user?.id == comentario.usuario.id ) ? <button onClick={() => handleApagarComentario(comentario.id)}>Excluir</button> : null }
+
+                      {(auth.user?.id == comentario.usuario.id ) ? <button onClick={() => handleEditarComentario(comentario)}>Editar</button> : null }
+
+                    </div>
                   </div>
                 </li>
               )
             })}
+
+            <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+              contentLabel="Example Modal"
+              className="modal-content"
+            >
+              <h2>Teste de modal</h2>
+              <hr />
+              <p>
+
+              </p>
+              <button onClick={closeModal}>Fechar</button>
+            </Modal>
+
           </div>
         </div>
       </div>

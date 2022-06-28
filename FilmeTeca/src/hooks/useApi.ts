@@ -13,13 +13,17 @@ export const comentarios = () => ({
   novoComentario: async (texto: string, idFilme:number, token: string ) => {
     api.defaults.headers.common = {'Authorization': `Bearer ${token}`}
 
-    useEffect(() => {
-
-    })
-
     const response = await api.post("comentario", {texto, idFilme})
     return response.data
-  }
+  },
+
+  excluirComentario: async (id: number, token: string) => {
+    api.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+
+    const response = await api.delete("comentario", {data: {id}})
+
+    return response.data
+  },
 
 }
 )
@@ -56,17 +60,9 @@ export const criarAutenticacao = () => ({
   },
 
   cadastro: async (nome: string, email: string, senha:string) => {
-    const response = await api.post("cadastro", {nome, email, senha})
+    const response = await api.post("auth", {nome, email, senha})
     return response.data
   }
-
-  // realizarComentario: async (texto: string, id:number, token: string) => {
-  //   api.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-
-  //   const response = await api.post("comentario", {texto, id})
-
-  //   return response.data
-  // }
 
 })
 
