@@ -25,6 +25,14 @@ export const comentarios = () => ({
     return response.data
   },
 
+  editarComentario: async (id: number, texto: string, token: string) => {
+    api.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+
+    const response = await api.put("comentario", {id, texto})
+
+    return response.data
+  },
+
 }
 )
 

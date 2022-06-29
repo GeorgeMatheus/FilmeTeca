@@ -2,20 +2,17 @@ import { useParams } from "react-router-dom"
 import { Navbar } from "../../components/Navbar/Navbar"
 import { comentarios, infoFilme } from "../../hooks/useApi"
 import './style.scss'
-import { Filme, Data } from '../../hooks/tipos'
-import { FaHeart, FaBookmark, FaStar, FaPlay } from 'react-icons/fa'
+import { Filme, Data, Comentario } from '../../hooks/tipos'
+import { FaHeart, FaBookmark, FaStar, FaPlay, FaTrashAlt, FaPencilAlt } from 'react-icons/fa'
 import { StarRating } from "../../components/rating/StarRating"
 import userImg from "../../assets/imagem_perfil.png"
-import { useContext, useState } from "react"
+import { useContext, useState, useRef } from "react"
 import { AuthContext } from "../../contexts/Auth/AuthContext"
-import Modal from "react-modal"
-
-Modal.setAppElement('#root');
 
 
 export function DetalhesFilme() {
 
-  
+
   const { id } = useParams()
   const image_path = 'https://image.tmdb.org/t/p/w500/'
   const image_path_original = 'https://image.tmdb.org/t/p/original/'
@@ -23,21 +20,23 @@ export function DetalhesFilme() {
   const auth = useContext(AuthContext)
   const api = comentarios()
 
+  console.log(auth.user)
 
   const { data: filme, isFetching } = infoFilme<Filme>("filme/", id)
 
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalVisivel, setModalVisivel] = useState(false)
+  const [editarComentario, setEditarComentario] = useState(null)
+  const [novoComentario, setNovoComentario] = useState('')
+  const [favoritar, setFavoritar] = useState(false)
+  const [addLista, setAddLista] = useState(false)
 
-  function openModal() {
-    setIsOpen(true);
+
+  const handleFavoritar = () => {
+    setFavoritar((prevState) => !prevState)
+
+    console.log(favoritar)
   }
 
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  
- 
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -45,8 +44,8 @@ export function DetalhesFilme() {
     const idFilme = parseInt(id)
 
 
-    if(auth.user) {
-      if(comentario) {
+    if (auth.user) {
+      if (comentario) {
         const token = localStorage.getItem('authToken')
 
         const data = await api.novoComentario(comentario, idFilme, token)
@@ -55,27 +54,35 @@ export function DetalhesFilme() {
         window.location.href = window.location.href
       }
 
-    }else{
+    } else {
       alert("Faça login para comentar!")
     }
   }
 
-  const handleApagarComentario = async (id:number) => {
+  const handleApagarComentario = async (id: number) => {
     const token = localStorage.getItem('authToken')
-    console.log(id)
 
-    const data = await api.excluirComentario(id, token)
+    await api.excluirComentario(id, token)
 
     window.location.href = window.location.href
   }
 
-  const handleEditarComentario = (comentario:object) => {
-    const token = localStorage.getItem('authToken')
+  const handleModalEditarComentario = (comentario: object) => {
     console.log(comentario)
-
-    openModal()
+    setModalVisivel(true)
+    setEditarComentario(comentario)
+    setNovoComentario(comentario.texto)
 
   }
+
+  const handleEditarComentario = async () => {
+    const token = localStorage.getItem('authToken')
+
+    await api.editarComentario(editarComentario.id, novoComentario, token)
+
+    window.location.href = window.location.href
+  }
+
 
 
   return (
@@ -89,8 +96,8 @@ export function DetalhesFilme() {
         <div className="container-Filme" style={{
           backgroundImage: `url(${image_path_original}${filme?.backdrop_path})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center center", backgroundColor: "rgba(0,0,0,0.8)", backgroundBlendMode: "darken"
         }}>
-          
-          
+
+
           <a><img src={`${image_path}${filme?.poster_path}`} alt="Foto de capa" /></a>
 
           <div className="container-infoFilme">
@@ -111,15 +118,15 @@ export function DetalhesFilme() {
             </div>
 
             <StarRating />
-            
+
             <h3 className="tagline">{filme?.tagline}</h3>
 
-            
+
             <div className="btn-media">
 
               <div>
                 {/* <span className="btn-tooltip">Favoritar esse filme</span> */}
-                <button className="btn" data-tooltip="Favoritar esse filme"><i><FaHeart /></i></button>
+                <button className="btn" data-tooltip="Favoritar esse filme" onClick={handleFavoritar}><i><FaHeart /></i></button>
               </div>
 
               <div>
@@ -132,7 +139,7 @@ export function DetalhesFilme() {
                 <button className="btn" data-tooltip="Reproduzir trailer"><i><FaPlay /></i></button>
               </div>
 
-              
+
 
             </div>
 
@@ -147,7 +154,7 @@ export function DetalhesFilme() {
         <div className="area-principal">
           <div className="cabecalho-comentarios">
             <h1>Comentários</h1>
-          
+
             <span className="qtd-comentarios">{filme?.comentarios?.length} Comentários</span>
           </div>
 
@@ -157,51 +164,52 @@ export function DetalhesFilme() {
             </div>
             <button>Comentar</button>
           </form>
-      
+
           <div className="comentarios">
 
             {(filme?.comentarios)?.map(comentario => {
               return (
                 <li key={comentario.id}>
-                  
-                  <div className="usuario-comentario">
-                    <img src={userImg} alt="imagem de perfil"/>
 
-                    <div>
+                  <div className="usuario-comentario">
+                    <img src={userImg} alt="imagem de perfil" />
+
+                    <div className="area-info">
                       <a href="#" className="nome-usuario">{comentario.usuario.nome}</a>
-                      <span className="data-comentario">{`${comentario.dataCadastro.slice(8,10)}/${comentario.dataCadastro.slice(5,7)}/${comentario.dataCadastro.slice(0,4)}`}</span>
-                      <span className="hora-comentario">{`${comentario.dataCadastro.slice(11,16)}`}</span>
+                      <span className="data-comentario">{`${comentario.dataCadastro.slice(8, 10)}/${comentario.dataCadastro.slice(5, 7)}/${comentario.dataCadastro.slice(0, 4)}`}</span>
+                      <span className="hora-comentario">{`${comentario.dataCadastro.slice(11, 16)}`}</span>
                       <p className="comentario">{comentario.texto}</p>
 
                     </div>
-                    <div>
-                      {(auth.user?.id == comentario.usuario.id ) ? <button onClick={() => handleApagarComentario(comentario.id)}>Excluir</button> : null }
+                    <div className="area-btn">
 
-                      {(auth.user?.id == comentario.usuario.id ) ? <button onClick={() => handleEditarComentario(comentario)}>Editar</button> : null }
+                      {(auth.user?.id == comentario.usuario.id) ? <button onClick={() => handleModalEditarComentario(comentario)}><i><FaPencilAlt /></i></button> : null}
+
+                      {(auth.user?.id == comentario.usuario.id) ? <button onClick={() => handleApagarComentario(comentario.id)}><i><FaTrashAlt /></i></button> : null}
 
                     </div>
                   </div>
                 </li>
               )
             })}
-
-            <Modal
-              isOpen={modalIsOpen}
-              onRequestClose={closeModal}
-              contentLabel="Example Modal"
-              className="modal-content"
-            >
-              <h2>Teste de modal</h2>
-              <hr />
-              <p>
-
-              </p>
-              <button onClick={closeModal}>Fechar</button>
-            </Modal>
-
           </div>
         </div>
       </div>
+
+      {modalVisivel ? <div className="modal-container">
+        <div className="conteudo-modal">
+          <button onClick={() => setModalVisivel(false)} className="btn-fecha-modal">X</button>
+          <h2>Altere aqui o seu comentário</h2>
+          <div>
+            <textarea value={novoComentario} onChange={e => setNovoComentario(e.target.value)}>
+              {editarComentario.texto}
+            </textarea>
+            <button className="btn-acao-modal" onClick={handleEditarComentario}>Alterar</button>
+          </div>
+
+        </div>
+      </div> : null}
+
     </>
   )
 }

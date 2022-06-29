@@ -264,6 +264,12 @@
 
 .usuario-comentario {
   display: flex;
+  flex-wrap: wrap;
+}
+
+.area-info {
+  flex: 1;
+  flex-wrap: wrap;
 }
 
 
@@ -298,28 +304,107 @@
   margin-top: 3px;
 }
 
+.area-btn button {
+  background-color: var(--roxo-claro);
+  border: none;
+  outline: none;
+  padding: 10px 4px;
+  margin: 3px 5px;
+  border-radius: 40px;
+  width: 36px;
+  height: 36px;
+  color: white;
+}
 
-.modal-overlay {
-  background: whitesmoke;
+
+.modal-container {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
   position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-
+  top: 0px;
+  left: 0px;
+  z-index: 2000;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.modal-content {
-  width: 80%;
-  max-width: 300px;
-  background: white;
-  padding: 10px;
+
+.conteudo-modal {
+  background: whitesmoke;
+  width: 40%;
+  min-width: 300px;
+  padding: 40px;
+  border: 2px solid #7b2cbf;
+  position: relative;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
+.conteudo-modal textarea {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  height: 100px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid gray;
+  padding: 10px;
+  resize: none;
+  flex: 1;
+}
+
+.btn-acao-modal {
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  // color: #3c096c;
+  color: #fff;
+  line-height: 1.2;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 50px;
+  background-color: var(--roxo-claro);
+
+  &:hover{
+    background-color: rgba($color: #5a189a, $alpha: 0.7);
+    transition: all 0.5s;
+  }
+}
+
+@keyframes modal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -60px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0px, 0);
+  }
+}
+
+.exibir .conteudo-modal {
+  animation: modal .3s;
+}
+
+.btn-fecha-modal {
+  position: absolute;
+  font-size: 1.2rem;
+  top: -10px;
+  right: -10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: #7b2cbf;
+  color: white;
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.3);
+}
 
 
 
