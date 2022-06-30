@@ -8,6 +8,7 @@ import { FaSearch, FaStar } from 'react-icons/fa'
 import { Filme, Genero, LayoutComponent } from '../../hooks/tipos'
 import { Botao } from "../../components/Botao";
 import { Rodape } from "../../components/Rodape";
+import { Paginacao } from "../../components/Paginacao";
 
 
 export function Home() {
@@ -16,6 +17,8 @@ export function Home() {
   let updatedList = []
 
   const { data: filmes, isFetching } = useApi<Filme[]>('filme/populares/1')
+
+  const [pagFilme, setPagFilme] = useState<Filme | null>(null)
 
   const { data: generos, isFetching: isFetchingGenero } = listarGeneros<Genero[]>('genero')
 
@@ -110,9 +113,9 @@ export function Home() {
 
           </div>
         </div>
-      </div>
 
-      <Rodape />
+      </div>
+      <Paginacao />
     </>
   )
 }

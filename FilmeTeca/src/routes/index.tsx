@@ -14,7 +14,9 @@ import { Login } from "../pages/Login"
 import { Cadastrar } from "../pages/Cadastrar"
 import { Perfil } from "../pages/Perfil"
 import { AuthProvider } from "../contexts/Auth/AuthProvider"
-import { RequireAuth } from "../contexts/Auth/RequireAuth";
+import { RequireAuth } from "../contexts/Auth/RequireAuth"
+
+
 
 
 
