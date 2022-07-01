@@ -10,7 +10,8 @@ export default createGlobalStyle`
 
   body {
     /* background: #f1f0f4; */
-    background: #f0f0f5;
+    /* background: #f0f0f5; */
+    background: whitesmoke;
     color: black;
     -webkit-font-smoothing: antialiased;
 
@@ -29,7 +30,7 @@ export default createGlobalStyle`
 
     }
     
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Roboto Slab', serif;
   
   }
 
